@@ -16,7 +16,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python 3.9
-      uses: actions/setup-python@v3
+      uses: actions/setup-python@v4
       with:
         python-version: 3.9
     - name: Install dependencies
@@ -57,9 +57,9 @@ jobs:
     runs-on: ubuntu-latest
     environment: Environment_WZXY_CONFIG_02          ## 填写需要使用的用户配置对应的环境,请自行根据实际情况修改
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Set up Python 3.9
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v4
       with:
         python-version: 3.9
     - name: Install dependencies
@@ -67,7 +67,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
     - name: Import cache
-      uses: actions/cache@v2
+      uses: actions/cache@v3
       with:
         path: .cache
         key: ${{ secrets.CACHE_NAME }}-${{ github.run_id }}
@@ -99,9 +99,9 @@ jobs:
     runs-on: ubuntu-latest
     environment: TJ          ## 填写需要使用的用户配置对应的环境,请自行根据实际情况修改
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Set up Python 3.9
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v4
       with:
         python-version: 3.9
     - name: Install dependencies
@@ -109,7 +109,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
     - name: Import cache
-      uses: actions/cache@v2
+      uses: actions/cache@v3
       with:
         path: .cache
         key: ${{ secrets.CACHE_NAME }}-${{ github.run_id }}
