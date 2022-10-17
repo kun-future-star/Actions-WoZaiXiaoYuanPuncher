@@ -39,17 +39,8 @@ jobs:
         MIAO_CODE: ${{secrets.MIAO_CODE}}
         WZXY_USERNAME: ${{secrets.USERNAME}}
         WZXY_PASSWORD: ${{secrets.PASSWORD}}
-        WZXY_TEMPERATURE: ${{secrets.TEMPERATURE}}
-        WZXY_LATITUDE: ${{secrets.LATITUDE}}
-        WZXY_LONGITUDE: ${{secrets.LONGITUDE}}
-        WZXY_COUNTRY: ${{secrets.COUNTRY}}
         WZXY_CITY: ${{secrets.CITY}}
-        WZXY_DISTRICT: ${{secrets.DISTRICT}}
-        WZXY_PROVINCE: ${{secrets.PROVINCE}}
-        WZXY_TOWNSHIP: ${{secrets.TOWNSHIP}}
-        WZXY_STREET: ${{secrets.STREET}}
-        WZXY_TOWNCODE: ${{secrets.TOWNCODE}}
-        WZXY_CITYCODE: ${{secrets.CITYCODE}}
+        WZXY_RECOMMEND: ${{secrets.RECOMMEND}}
       run: python wzxy-dailyreport.py
 
   ## 多账户配置示例，请复制下面的代码后取消注释再修改，粘贴时注意缩进
@@ -82,17 +73,8 @@ jobs:
         MIAO_CODE: ${{secrets.MIAO_CODE}}
         WZXY_USERNAME: ${{secrets.USERNAME}}
         WZXY_PASSWORD: ${{secrets.PASSWORD}}
-        WZXY_TEMPERATURE: ${{secrets.TEMPERATURE}}
-        WZXY_LATITUDE: ${{secrets.LATITUDE}}
-        WZXY_LONGITUDE: ${{secrets.LONGITUDE}}
-        WZXY_COUNTRY: ${{secrets.COUNTRY}}
         WZXY_CITY: ${{secrets.CITY}}
-        WZXY_DISTRICT: ${{secrets.DISTRICT}}
-        WZXY_PROVINCE: ${{secrets.PROVINCE}}
-        WZXY_TOWNSHIP: ${{secrets.TOWNSHIP}}
-        WZXY_STREET: ${{secrets.STREET}}
-        WZXY_TOWNCODE: ${{secrets.TOWNCODE}}
-        WZXY_CITYCODE: ${{secrets.CITYCODE}}
+        WZXY_RECOMMEND: ${{secrets.RECOMMEND}}
       run: python wzxy-dailyreport.py
 
   USER_03:    ## Jobs名，注意修改序号
@@ -124,17 +106,8 @@ jobs:
         MIAO_CODE: ${{secrets.MIAO_CODE}}
         WZXY_USERNAME: ${{secrets.USERNAME}}
         WZXY_PASSWORD: ${{secrets.PASSWORD}}
-        WZXY_TEMPERATURE: ${{secrets.TEMPERATURE}}
-        WZXY_LATITUDE: ${{secrets.LATITUDE}}
-        WZXY_LONGITUDE: ${{secrets.LONGITUDE}}
-        WZXY_COUNTRY: ${{secrets.COUNTRY}}
         WZXY_CITY: ${{secrets.CITY}}
-        WZXY_DISTRICT: ${{secrets.DISTRICT}}
-        WZXY_PROVINCE: ${{secrets.PROVINCE}}
-        WZXY_TOWNSHIP: ${{secrets.TOWNSHIP}}
-        WZXY_STREET: ${{secrets.STREET}}
-        WZXY_TOWNCODE: ${{secrets.TOWNCODE}}
-        WZXY_CITYCODE: ${{secrets.CITYCODE}}
+        WZXY_RECOMMEND: ${{secrets.RECOMMEND}}
       run: python wzxy-dailyreport.py
 
   # USER_05:    ## Jobs名，注意修改序号
