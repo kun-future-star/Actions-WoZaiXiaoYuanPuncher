@@ -39,8 +39,7 @@ jobs:
         MIAO_CODE: ${{secrets.MIAO_CODE}}
         WZXY_USERNAME: ${{secrets.USERNAME}}
         WZXY_PASSWORD: ${{secrets.PASSWORD}}
-        WZXY_CITY: ${{secrets.CITY}}
-        WZXY_RECOMMEND: ${{secrets.RECOMMEND}}
+        WZXY_ADDRESS: ${{secrets.ADDRESS}}
       run: python wzxy-dailyreport.py
 
   ## 多账户配置示例，请复制下面的代码后取消注释再修改，粘贴时注意缩进
@@ -73,8 +72,7 @@ jobs:
         MIAO_CODE: ${{secrets.MIAO_CODE}}
         WZXY_USERNAME: ${{secrets.USERNAME}}
         WZXY_PASSWORD: ${{secrets.PASSWORD}}
-        WZXY_CITY: ${{secrets.CITY}}
-        WZXY_RECOMMEND: ${{secrets.RECOMMEND}}
+        WZXY_ADDRESS: ${{secrets.ADDRESS}}
       run: python wzxy-dailyreport.py
 
   USER_03:    ## Jobs名，注意修改序号
@@ -106,8 +104,7 @@ jobs:
         MIAO_CODE: ${{secrets.MIAO_CODE}}
         WZXY_USERNAME: ${{secrets.USERNAME}}
         WZXY_PASSWORD: ${{secrets.PASSWORD}}
-        WZXY_CITY: ${{secrets.CITY}}
-        WZXY_RECOMMEND: ${{secrets.RECOMMEND}}
+        WZXY_ADDRESS: ${{secrets.ADDRESS}}
       run: python wzxy-dailyreport.py
 
   USER_04:    ## Jobs名，注意修改序号
@@ -139,6 +136,5 @@ jobs:
         MIAO_CODE: ${{secrets.MIAO_CODE}}
         WZXY_USERNAME: ${{secrets.USERNAME}}
         WZXY_PASSWORD: ${{secrets.PASSWORD}}
-        WZXY_CITY: ${{secrets.CITY}}
-        WZXY_RECOMMEND: ${{secrets.RECOMMEND}}
+        WZXY_ADDRESS: ${{secrets.ADDRESS}}
       run: python wzxy-dailyreport.py

@@ -4,18 +4,20 @@ import hashlib
 import hmac
 import json
 import os
+import ssl
 import time
 import urllib
 from urllib.parse import urlencode
 
 import requests
+import urllib3
 
 import utils
 
 
 class WoZaiXiaoYuanPuncher(utils.Data):
     def __init__(self):
-        super().__init__(city=os.environ["WZXY_CITY"], recommend=os.environ["WZXY_RECOMMEND"])
+        super().__init__(your_address=os.environ["WZXY_ADDRESS"])
         # 打卡时段
         self.seq = None
         # 打卡结果
@@ -32,6 +34,7 @@ class WoZaiXiaoYuanPuncher(utils.Data):
             "Host": "gw.wozaixiaoyuan.com",
             "Accept-Language": "en-us,en",
             "Accept": "application/json, text/plain, */*",
+            "Referer": "https://servicewechat.com/wxce6d08f781975d91/188/page-frame.html",
         }
         # 请求体（必须有）
         self.body = "{}"
@@ -45,7 +48,7 @@ class WoZaiXiaoYuanPuncher(utils.Data):
         url = f"{self.loginUrl}?username={username}&password={password}"
         self.session = requests.session()
         # 登录
-        response = self.session.post(url=url, data=self.body, headers=self.header)
+        response = self.session.post(url=url, data=self.body, headers=self.header, verify=False)
         res = json.loads(response.text)
         if res["code"] == 0:
             print("使用账号信息登录成功")
@@ -64,7 +67,7 @@ class WoZaiXiaoYuanPuncher(utils.Data):
         self.header["Host"] = "student.wozaixiaoyuan.com"
         self.header["JWSESSION"] = self.jwsession
         self.session = requests.session()
-        response = self.session.post(url=url, data=self.body, headers=self.header)
+        response = self.session.post(url=url, data=self.body, headers=self.header, verify=False)
         res = json.loads(response.text)
         # 如果 jwsession 无效，则重新 登录 + 打卡
         if res["code"] == -10:
@@ -108,9 +111,10 @@ class WoZaiXiaoYuanPuncher(utils.Data):
         self.header["JWSESSION"] = self.jwsession
         cur_time = int(round(time.time() * 1000))
         sign_data = {
-            "answers": '["0"]',  # 在此自定义answers字段
+            "answers": self.answers,
             "seq": str(seq),
             "temperature": utils.getRandomTemperature("36.0~36.5"),
+            "userId": "",
             "latitude": self.latitude,
             "longitude": self.longitude,
             "country": self.country,
@@ -119,10 +123,10 @@ class WoZaiXiaoYuanPuncher(utils.Data):
             "province": self.province,
             "township": self.township,
             "street": self.street,
+            "myArea": "",
             "areacode": self.areacode,
             "towncode": self.towncode,
             "citycode": self.citycode,
-            "userId": "",
             "timestampHeader": cur_time,
             "signatureHeader": hashlib.sha256(
                 f"{self.province}_{cur_time}_{self.city}".encode(
@@ -292,6 +296,8 @@ class WoZaiXiaoYuanPuncher(utils.Data):
 
 if __name__ == "__main__":
     # 找不到cache，登录+打卡
+    ssl._create_default_https_context = ssl._create_unverified_context
+    urllib3.disable_warnings()
     wzxy = WoZaiXiaoYuanPuncher()
     if not os.path.exists(".cache"):
         print("找不到cache文件，正在使用账号信息登录...")

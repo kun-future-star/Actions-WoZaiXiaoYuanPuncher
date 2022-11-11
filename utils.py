@@ -3,7 +3,6 @@ import json
 import os
 import random
 import time
-from urllib import parse
 
 import jsonpickle
 import pytz
@@ -34,7 +33,7 @@ def getRandomTemperature(self, temperature="36.0~36.5"):
 
 # 读写 json 文件
 class processJson:
-    def __init__(self, path, address):
+    def __init__(self, path, your_address):
         self.path = path
         self.location = None
         self.address_component = None
@@ -42,8 +41,9 @@ class processJson:
         self.ad_info = None
         self.formatted_addresses = None
         self.jwsession = None
-        self.address = address
+        self.your_address = your_address
         self.recommend = None
+        self.answers = None
 
     def read(self):
         try:
@@ -62,17 +62,16 @@ class processJson:
 
     def write(self):
         with open(self.path, "w", encoding="utf-8") as file:
-            self.json_request(self.address)
+            self.json_request(self.your_address)
             file.write(jsonpickle.encode(self.__dict__, indent=4))
         file.close()
 
-    def json_request(self, address):
-        url = 'https://apis.map.qq.com/ws/geocoder/v1/?address=' + parse.quote(
-            address) + '&key=A3YBZ-NC5RU-MFYVV-BOHND-RO3OT-ABFCR'
-        jr = json.loads(requests.get(url).text)['result']['location']
+    def json_request(self, your_address):
+        url = 'https://apis.map.qq.com/ws/geocoder/v1/?address=' + your_address + '&key=A3YBZ-NC5RU-MFYVV-BOHND-RO3OT-ABFCR'
+        jr = json.loads(requests.get(url, verify=False).text)['result']['location']
         url = 'https://apis.map.qq.com/ws/geocoder/v1/?key=A3YBZ-NC5RU-MFYVV-BOHND-RO3OT-ABFCR&location=' + str(
             jr['lat']) + ',' + str(jr['lng'])
-        jr = json.loads(requests.get(url).text)['result']
+        jr = json.loads(requests.get(url, verify=False).text)['result']
         self.location = jr['location']
         self.address_component = jr['address_component']
         self.address_reference = jr['address_reference']
@@ -82,11 +81,12 @@ class processJson:
 
 
 class Data(processJson):
-    def __init__(self, city, recommend):
-        super().__init__(".cache/cache.json", city + recommend)
+    def __init__(self, your_address):
+        super().__init__(".cache/cache.json", your_address)
+        self.answers = '["0","' + your_address + '","1"]'
         jr = self.read()
-        if 'recommend' not in jr or jr['recommend'] != recommend:
-            jr = self.json_request(city + recommend)
+        if 'your_address' not in jr or jr['your_address'] != your_address:
+            jr = self.json_request(your_address)
             self.recommend = jr['formatted_addresses']['recommend']
             self.set_cache()
         if 'jwsession' in jr:
