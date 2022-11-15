@@ -12,7 +12,7 @@ on:
 jobs:
   USER_01:
     runs-on: ubuntu-latest
-    environment: Environment_WZXY_CONFIG_01 # 填写需要使用的用户配置对应的环境,请自行根据实际情况修改
+    environment: WJK # 填写需要使用的用户配置对应的环境,请自行根据实际情况修改
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python 3.9
@@ -45,7 +45,7 @@ jobs:
   ## 多账户配置示例，请复制下面的代码后取消注释再修改，粘贴时注意缩进
   USER_02:    ## Jobs名，注意修改序号
     runs-on: ubuntu-latest
-    environment: Environment_WZXY_CONFIG_02          ## 填写需要使用的用户配置对应的环境,请自行根据实际情况修改
+    environment: STJ          ## 填写需要使用的用户配置对应的环境,请自行根据实际情况修改
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python 3.9
@@ -77,7 +77,7 @@ jobs:
 
   USER_03:    ## Jobs名，注意修改序号
     runs-on: ubuntu-latest
-    environment: TJ          ## 填写需要使用的用户配置对应的环境,请自行根据实际情况修改
+    environment: GYK          ## 填写需要使用的用户配置对应的环境,请自行根据实际情况修改
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python 3.9
@@ -107,34 +107,4 @@ jobs:
         WZXY_ADDRESS: ${{secrets.ADDRESS}}
       run: python wzxy-dailyreport.py
 
-  USER_04:    ## Jobs名，注意修改序号
-    runs-on: ubuntu-latest
-    environment: ZXR          ## 填写需要使用的用户配置对应的环境,请自行根据实际情况修改
-    steps:
-    - uses: actions/checkout@v3
-    - name: Set up Python 3.9
-      uses: actions/setup-python@v4
-      with:
-        python-version: 3.9
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-    - name: Import cache
-      uses: actions/cache@v3
-      with:
-        path: .cache
-        key: ${{ secrets.CACHE_NAME }}-${{ github.run_id }}
-        restore-keys: ${{ secrets.CACHE_NAME }}-
-    - name: Run script
-      env:
-        DD_BOT_ACCESS_TOKEN: ${{secrets.DD_BOT_ACCESS_TOKEN}}
-        DD_BOT_SECRET: ${{secrets.DD_BOT_SECRET}}
-        SCT_KEY: ${{secrets.SCT_KEY}}
-        BARK_TOKEN: ${{secrets.BARK_TOKEN}}
-        PUSHPLUS_TOKEN: ${{secrets.PUSHPLUS_TOKEN}}
-        MIAO_CODE: ${{secrets.MIAO_CODE}}
-        WZXY_USERNAME: ${{secrets.USERNAME}}
-        WZXY_PASSWORD: ${{secrets.PASSWORD}}
-        WZXY_ADDRESS: ${{secrets.ADDRESS}}
-      run: python wzxy-dailyreport.py
+  
